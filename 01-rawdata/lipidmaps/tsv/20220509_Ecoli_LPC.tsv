@@ -1,0 +1,23 @@
+	Lyso-Phosphatidylcholine Profile;  LPC																												
+	Data are expressed as normalized intensities and constitute relative abundances per mg sample (relative to exactly measured internal standards).  																												
+	The data can be used for direct comparison of individual metabolites between different samples as well as of different metabolites within the same sample.																												
+	ND = not detected																												
+																													
+																													
+		Normalized Intensities  (UNIT = Intensity / mg sample)																											
+Sample ID		LPC 12:1_5.16	LPC 15:2_3.50	LPC 16:0_6.55	LPC 17:6_3.08	LPC 18:6_2.89	LPC 21:4_9.43	LPC 22:1_9.33	LPC 22:3_9.90	LPC 22:6_3.97	LPC 23:1_13.77	LPC 23:2_9.25	LPC 23:6_23.42	LPC 24:0_29.82	LPC 24:1_10.73	LPC 24:2_9.67	LPC 24:2_10.07	LPC 25:0_30.23	LPC 25:2_9.41	LPC 25:2_10.49	LPC 25:2_11.88	LPC 25:2_17.28	LPC 25:3_14.33	LPC 25:3_14.80	LPC 25:8_9.73	LPC 26:0_30.71	LPC 26:2_9.86	LPC 26:3_16.42	LPC 26:7_11.43
+JWL0201		0.0	ND	ND	0.0	ND	ND	ND	0.0	0.0	0.0	ND	ND	ND	0.0	ND	ND	ND	ND	0.0	ND	0.5	ND	0.0	ND	ND	ND	0.1	ND
+JWL0202		ND	0.0	ND	ND	ND	0.0	ND	0.0	0.0	0.0	ND	0.0	ND	ND	ND	ND	ND	ND	0.0	ND	0.5	ND	0.0	ND	ND	ND	0.1	ND
+JWL0203		0.0	0.0	ND	0.0	0.0	0.0	ND	ND	0.1	0.3	ND	0.0	ND	0.0	ND	ND	ND	ND	ND	0.0	1.5	ND	0.0	ND	ND	ND	ND	ND
+JWL0207		0.0	ND	0.0	ND	ND	ND	0.0	ND	0.1	ND	ND	0.0	ND	ND	0.0	0.0	ND	0.1	ND	0.0	0.9	0.1	0.0	0.1	ND	ND	0.3	0.0
+JWL0208		0.0	ND	ND	ND	ND	ND	0.0	ND	ND	0.0	ND	0.0	ND	ND	0.0	0.0	ND	0.0	ND	0.0	0.5	0.1	0.0	0.0	ND	0.0	ND	ND
+JWL0209		ND	0.1	ND	ND	0.0	ND	ND	0.0	ND	0.1	ND	0.0	ND	ND	0.0	ND	ND	ND	ND	0.0	0.9	0.1	0.0	0.1	ND	0.0	ND	ND
+JWL0210		ND	ND	ND	ND	0.0	0.0	ND	ND	ND	ND	0.0	0.0	0.0	0.0	ND	ND	0.2	ND	0.0	ND	0.6	0.0	ND	ND	0.1	ND	ND	ND
+JWL0211		ND	0.0	ND	0.0	0.0	0.0	ND	0.0	ND	0.0	0.0	0.1	0.1	0.1	ND	ND	0.2	ND	0.0	ND	ND	0.1	0.0	0.0	0.2	ND	ND	ND
+JWL0212		ND	0.0	0.0	0.0	0.0	0.0	ND	ND	ND	ND	0.0	0.0	0.0	0.0	ND	ND	0.1	ND	ND	ND	0.7	0.0	0.0	0.0	0.1	ND	0.1	ND
+JWL0216		ND	0.0	0.0	0.0	0.0	ND	0.0	ND	0.1	0.0	ND	0.0	0.0	ND	0.0	0.0	0.1	0.0	ND	ND	ND	0.1	0.0	0.0	0.1	0.0	ND	0.0
+JWL0217		0.0	0.0	0.0	0.0	0.0	ND	0.0	ND	ND	0.1	ND	0.0	0.1	ND	0.0	0.0	0.1	ND	ND	ND	0.9	0.1	0.0	0.1	0.1	0.0	ND	0.0
+JWL0218		ND	ND	0.0	ND	ND	0.0	ND	ND	ND	0.0	0.0	0.0	ND	ND	0.0	0.0	0.1	0.0	ND	0.0	ND	0.1	0.0	0.0	0.1	0.0	0.2	0.0
+																													
+Total Analytes	28	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+Total MS2 Confirmed	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0

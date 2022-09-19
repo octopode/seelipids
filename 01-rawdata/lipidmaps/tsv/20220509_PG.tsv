@@ -1,0 +1,34 @@
+	Phosphatidylglycerol Profile;  PG													
+	Data are expressed as normalized intensities and constitute relative abundances per mg tissue (relative to exactly measured internal standards).  													
+	The data can be used for direct comparison of individual metabolites between different samples as well as of different metabolites within the same sample.													
+	ND = not detected													
+														
+														
+		Normalized Intensities  (UNIT = Intensity / mg tissue)												
+Sample ID		PG 30:3_6.80	PG 31:3_7.78	PG 32:1_14.82 | 16:0/16:1	PG 34:2_15.21 | 18:1/16:1	PG 38:6_14.83 | 22:6/16:0	PG 38:7_21.17	PG 38:10_4.20	PG 39:7_13.83	PG 40:7_15.39 | 22:6/18:1	PG 40:8_13.31 | 22:6/18:2	PG 41:5_19.62	PG 41:5_20.03	PG 42:11_11.71 | 20:5_22:6
+JWL0157		ND	0.08	ND	ND	ND	ND	ND	0.07	0.18	ND	ND	ND	0.21
+JWL0159		ND	ND	ND	ND	ND	ND	ND	0.18	0.15	ND	ND	ND	0.30
+JWL0166		ND	ND	0.03	0.04	0.05	ND	ND	ND	0.03	0.13	0.24	ND	ND
+JWL0167		ND	0.07	ND	ND	ND	0.02	ND	ND	ND	0.09	ND	ND	ND
+JWL0168		0.03	ND	0.04	0.30	ND	ND	ND	ND	0.15	ND	0.29	0.07	ND
+JWL0169		ND	ND	ND	ND	ND	ND	0.02	ND	ND	ND	ND	ND	ND
+JWL0170		0.01	0.10	ND	ND	0.05	ND	0.01	0.06	ND	0.05	0.22	0.02	0.05
+JWL0171		0.03	ND	ND	ND	ND	ND	ND	0.17	ND	ND	ND	ND	ND
+JWL0172		ND	ND	0.12	ND	ND	ND	ND	ND	ND	0.01	ND	ND	ND
+JWL0173		0.02	ND	1.31	0.65	0.02	ND	ND	0.07	0.10	0.04	0.13	0.07	0.13
+JWL0174		ND	ND	ND	0.01	0.01	0.02	0.01	ND	0.02	ND	ND	ND	ND
+JWL0175		ND	ND	0.02	0.10	0.06	ND	ND	ND	0.05	ND	ND	0.07	ND
+JWL0176		ND	ND	ND	0.10	ND	ND	ND	ND	0.08	ND	0.27	ND	0.04
+JWL0177		ND	ND	0.02	0.08	ND	ND	ND	ND	0.04	ND	ND	ND	0.01
+JWL0178		ND	ND	0.04	0.11	0.07	ND	ND	ND	0.07	ND	0.05	ND	0.04
+JWL0179		0.03	0.18	ND	ND	ND	0.01	0.04	0.02	0.08	ND	0.13	ND	ND
+JWL0180		0.03	0.18	ND	ND	ND	0.01	0.06	ND	0.09	ND	0.08	0.11	0.05
+JWL0181		0.02	0.11	ND	ND	ND	ND	0.03	ND	0.08	ND	0.06	ND	ND
+JWL0185		ND	ND	ND	ND	ND	0.03	0.01	0.02	0.19	ND	0.38	0.05	0.08
+JWL0188		0.07	0.20	0.01	0.03	0.01	0.02	0.05	ND	0.29	ND	0.30	ND	ND
+JWL0189		0.07	0.18	ND	ND	ND	ND	0.02	ND	ND	ND	0.07	ND	ND
+JWL0190		ND	ND	ND	ND	ND	0.02	0.03	0.07	0.03	ND	0.39	ND	ND
+JWL0191		ND	ND	ND	ND	0.14	ND	ND	ND	0.45	0.18	0.15	0.45	0.65
+														
+Total Analytes	13	1	1	1	1	1	1	1	1	1	1	1	1	1
+Total MS2 Confirmed	6	0	0	1	1	1	0	0	0	1	1	0	0	1
