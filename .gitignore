@@ -37,3 +37,11 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# mine
+.bak
+stash/*
+*.DS_Store
+# large
+#02-tidydata/lipidmaps_wmeta.tsv
+#02-tidydata/lipidmaps_tidy.tsv
