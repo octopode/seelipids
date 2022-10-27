@@ -50,6 +50,9 @@ ltypdata %>%
   mutate(strain = factor(strain, levels = c("FM628", "fad2"))) %>% 
   gg_headgp(
     darkmode = FALSE,
+    # this can help declutter a complex plot by removing(!) low-abundance species
+    # but if not left at 0, it should be set very low to avoid misrepresenting the data!
+    thres_draw = 0.001, 
     # aesthetic mappings are passed straight thru
     x = rep,
     y = frac_molar,

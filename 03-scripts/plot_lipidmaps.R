@@ -92,6 +92,9 @@ lmapdata %>%
   mutate(sp_eid = sp_eid %>% factor(., levels = unique(.))) %>% 
   gg_headgp(
     darkmode = FALSE,
+    # this can help declutter a complex plot by removing(!) low-abundance species
+    # but if not left at 0, it should be set very low to avoid misrepresenting the data!
+    thres_draw = 0.001, 
     # aesthetic mappings are passed straight thru
     x = sp_eid,
     y = frac_molar,

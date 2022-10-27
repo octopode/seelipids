@@ -284,14 +284,24 @@ theme_pubk = function(...){
 gg_headgp = function(
   data,
   darkmode = FALSE,
+  thres_draw = 0, # can pass a mole fraction threshold below which color blocks are removed.
   label_frac = 0.015, # min fraction at which bar get labeled; set to 1 to disable labels.
   label_size = 1.5,
   # aesthetics get passed in as naked args
   ...
 ){
+  # unpack the ellipsis args as strings
+  mapstrs = lapply(rlang::enexprs(...), as.character)
   # ensure ordering
   data = data %>% arrange(class)
   this_gg = data %>%
+    ## apply threshold
+    filter(eval(sym(mapstrs$y)) >= thres_draw) %>% 
+    ## EXAMPLE softcoded to use whatever is passed as x
+    #summarize(wavg = sum(eval(sym(mapstrs$x))*frac_molar)/sum(frac_molar)),
+    ## and renorm
+    group_by(eval(sym(mapstrs$x))) %>% 
+    mutate(across(mapstrs$y, function(x){x/sum(x)})) %>% 
     # cut the factor down to include only the classes in the data
     mutate(class = class %>% factor(., levels = unique(as.character(.)))) %>% 
     ggplot(mapping = aes(...)) +
@@ -301,6 +311,7 @@ gg_headgp = function(
       size = 0.05, 
       color = ifelse(darkmode, "black", "white")
     )
+  #print(this_gg)
   # label individual compounds if they are resolved in data
   if("annot" %in% colnames(data)){
     this_gg = this_gg +
