@@ -101,14 +101,14 @@ lmapdata %>%
     fill = class
   ) +
   labs(
-    title = "Ctenophore total lipids",
+    title = "Ctenophore total lipids, thres_draw=0.001, simplified",
     x = "Species and sample ID",
     y = "Mole fraction total lipids",
     fill = "Headgroup"
   )
 # save vector and raster images
-ggsave(here("04-pdf", "ctenos_tot_lipids.pdf"), width = 10, height = 8)
-ggsave(here("05-png", "ctenos_tot_lipids.png"), width = 10, height = 8)
+ggsave(here("04-pdf", "ctenos_tot_lipids_thres0-001.pdf"), width = 10, height = 8)
+ggsave(here("05-png", "ctenos_tot_lipids_thres0-001.png"), width = 10, height = 8)
 
 ## PLOT2: phospholipids only, plotted individually
 lmapdata %>% 

@@ -52,7 +52,9 @@ ltypdata %>%
     darkmode = FALSE,
     # this can help declutter a complex plot by removing(!) low-abundance species
     # but if not left at 0, it should be set very low to avoid misrepresenting the data!
-    thres_draw = 0.001, 
+    #thres_draw = 0.002, 
+    # how abundant a compound must be to get a text label
+    label_frac = 0.01,
     # aesthetic mappings are passed straight thru
     x = rep,
     y = frac_molar,
