@@ -16,7 +16,7 @@ read_lmx = function(files, skip = 9, na = "ND"){
     rowwise() %>% 
     mutate(sheet = path %>% excel_sheets() %>% list()) %>% 
     unnest(sheet) %>% 
-    filter(str_detect(sheet, "detected")) %>% 
+    filter(str_detect(sheet, "(detected|data)")) %>% # backward-compatible w/2020 format
     rowwise() %>% 
     mutate(
       # read all the data out
@@ -26,7 +26,7 @@ read_lmx = function(files, skip = 9, na = "ND"){
         na = na,
         skip = skip
       ) %>% 
-        select(!contains("...")) %>%
+        select(!contains("...")) %>% 
         rename(eid = `Sample ID`) %>%
         list()
     ) %>% 
@@ -36,6 +36,9 @@ read_lmx = function(files, skip = 9, na = "ND"){
       !is.na(eid) &
         !str_detect(eid, "Total")
     ) %>% 
+    # coerce to ensure meltability
+    # keeps path and sheet metadata, which can come in handy
+    mutate(across(-c(eid, path, sheet), as.numeric)) %>% 
     pivot_longer(
       cols = -c(eid, path, sheet),
       names_to  = "id",
