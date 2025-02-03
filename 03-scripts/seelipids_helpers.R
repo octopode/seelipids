@@ -2,6 +2,7 @@
 
 library(here)
 library(tidyverse)
+library(readxl)
 library(ggpubr)
 library(RColorBrewer)
 
@@ -46,6 +47,32 @@ read_lmx = function(files, skip = 9, na = "ND"){
     )
 }
 
+# parse Lipid Species Excel spreadsheet of the format sent by ETS @ UW
+# Can read multiple files; each sample is expected to occur _once_
+# in the entire file set
+read_uwx = function(files, skip = 0, ...){
+  # load all files and add a column with source filename
+  lapply(
+    files,
+    function(x){read_excel(x) %>% mutate(fname = basename(x))}
+  ) %>% 
+    # bind the files together
+    as.list() %>% 
+    bind_rows() %>% 
+    rename(eid = `Sample ID`) %>% 
+    # pivot to long format
+    # if one EID occurs in multiple files, the entries can be
+    # distinguished using the fname column
+    group_by(fname, eid) %>%
+    pivot_longer(
+      cols = -c(fname, eid), 
+      names_to = "id", 
+      # rab stands for "relative abundance"
+      values_to = "rab"
+    )
+}
+
+# just the standard error of the mean
 serr = function(x){sd(x)/sqrt(length(x))}
 
 # How many acyl chains does passed class of lipids have?
