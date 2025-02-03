@@ -50,7 +50,7 @@ read_lmx = function(files, skip = 9, na = "ND"){
 # parse Lipid Species Excel spreadsheet of the format sent by ETS @ UW
 # Can read multiple files; each sample is expected to occur _once_
 # in the entire file set
-read_uwx = function(files, skip = 0, ...){
+read_uwx = function(files){
   # load all files and add a column with source filename
   lapply(
     files,
