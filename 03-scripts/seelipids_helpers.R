@@ -6,6 +6,23 @@ library(readxl)
 library(ggpubr)
 library(RColorBrewer)
 
+## IMPORTANT MAPPINGS
+
+# All the lipid classes currently recognized by seelipids.
+# These are all acceptable in input, but some are synonymous and will be
+# mapped to a more standardized nomenclature.
+classes = c(
+  "P-PC", "O-PC", "PC", "LPC",
+  "P-PE", "O-PE", "PE", "LPE",
+  "PS", "LPS",
+  "PI", "LPI",
+  "CL", "PG", "LPG",
+  "PA",
+  "Cer", "HexCer", "HexCER", "LacCer", "LacCER",  "Cer1P", "SM",
+  "FA", "DG", "TG",
+  "AC", "CE"
+)
+
 ## LIPID MAPS PARSING HELPERS
 
 # Read multi-sheet Lipid Maps Excel file,
@@ -47,6 +64,26 @@ read_lmx = function(files, skip = 9, na = "ND"){
     )
 }
 
+# parse Lipid Species CSV file of the format sent by ETS @ UW
+# Can read multiple files; each sample is expected to occur _once_
+# in the entire file set
+read_uw = function(files){
+  # load all files and add a column with source filename
+  files %>% 
+    read_csv(id = "fname") %>% 
+    rename(eid = `Sample ID`) %>% 
+    # pivot to long format
+    # if one EID occurs in multiple files, the entries can be
+    # distinguished using the fname column
+    group_by(fname, eid) %>%
+    pivot_longer(
+      cols = -c(fname, eid), 
+      names_to = "id", 
+      # rab stands for "relative abundance"
+      values_to = "rab"
+    )
+}
+
 # parse Lipid Species Excel spreadsheet of the format sent by ETS @ UW
 # Can read multiple files; each sample is expected to occur _once_
 # in the entire file set
@@ -77,7 +114,7 @@ serr = function(x){sd(x)/sqrt(length(x))}
 
 # How many acyl chains does passed class of lipids have?
 class2tails = Vectorize(function(class){
-  if(str_detect(class, 'L|AC|CE')){
+  if(str_detect(class, 'L|AC|CE|FA')){
     return(1L)
   }
   if(str_detect(class, 'T')){
@@ -100,17 +137,8 @@ parse_lipidmaps_id = function(longdf){
         str_split('[ _:/]'),
       # headgroup class
       class =  unlist(struc)[[1]] %>%
-        factor(
-          levels = c(
-            "P-PC", "PC", "LPC",
-            "P-PE", "PE", "LPE",
-            "PS", "LPS",
-            "PI", "PG",
-            "Cer", "Cer1P", "SM",
-            "DG", "TG",
-            "AC", "CE"
-          )
-        ),
+        # this refers to the shared list of recognized headgroups
+        factor(levels = classes),
       # tails
       tails = class2tails(class),
       # total # hydroxy groups
@@ -216,6 +244,111 @@ cols_meta_ltyp = c(
   "totaldb" = "dbonds", 
   "totaloh" = "hydrox"
 )
+
+# UW format parsing helpers
+parse_uw_id = function(longdf){
+  longdf %>% 
+    group_by(id) %>%
+    mutate(
+      # use separate()? 20250303
+      # parse headgroup-level structural data
+      struc  = id %>%
+        str_split('[ _:/]'),
+      # headgroup class
+      class =  unlist(struc)[[1]] %>%
+        # this refers to the shared list of recognized headgroups
+        factor(levels = classes),
+      # tails
+      tails = class2tails(class),
+      # total # hydroxy groups
+      hydrox = unlist(struc)[[2]] %>%
+        str_extract("[nmdt]") %>%
+        c('n'=0L, 'm'=1L, 'd'=2L, 't'=3L)[.],
+      # total carbons
+      carbon = unlist(struc)[[2]] %>%
+        str_remove("[nmdt]") %>%
+        as.integer(),
+      # total double bonds
+      dbonds  = unlist(struc)[[3]] %>%
+        as.integer(),
+      rt      = unlist(struc)[[4]] %>%
+        as.numeric(),
+      # fatty acid-level structural data
+      hydrsn1 = ifelse(
+        "|" %in% unlist(struc),
+        unlist(struc)[[6]] %>%
+          str_extract("[nmdt]") %>%
+          c('n'=0L, 'm'=1L, 'd'=2L, 't'=3L)[.],
+        NA
+      ),
+      carbsn1 = ifelse(
+        "|" %in% unlist(struc),
+        unlist(struc)[[6]] %>%
+          str_remove("[nmdt]") %>%
+          as.numeric(),
+        NA
+      ),
+      dbonsn1 = ifelse(
+        "|" %in% unlist(struc),
+        unlist(struc)[[7]] %>%
+          as.integer(),
+        NA
+      ),
+      hydrsn2 = ifelse(
+        "|" %in% unlist(struc),
+        unlist(struc)[[8]] %>%
+          str_extract("[nmdt]") %>%
+          c('n'=0L, 'm'=1L, 'd'=2L, 't'=3L)[.],
+        NA
+      ),
+      carbsn2 = ifelse(
+        "|" %in% unlist(struc),
+        unlist(struc)[[8]] %>%
+          str_remove("[nmdt]") %>%
+          as.numeric(),
+        NA
+      ),
+      dbonsn2 = ifelse(
+        "|" %in% unlist(struc),
+        unlist(struc)[[9]] %>%
+          as.integer(),
+        NA
+      ),
+      hydrsn3 = ifelse(
+        ("|" %in% unlist(struc)) & (tails == 3),
+        unlist(struc)[[10]] %>%
+          str_extract("[nmdt]") %>%
+          c('n'=0L, 'm'=1L, 'd'=2L, 't'=3L)[.],
+        NA
+      ),
+      carbsn3 = ifelse(
+        ("|" %in% unlist(struc)) & (tails == 3),
+        unlist(struc)[[10]] %>%
+          str_remove("[nmdt]") %>%
+          as.numeric(),
+        NA
+      ),
+      dbonsn3 = ifelse(
+        ("|" %in% unlist(struc)) & (tails == 3),
+        unlist(struc)[[11]] %>%
+          as.integer(),
+        NA
+      ),
+      # sn1/2 positions resolved?
+      stereo = str_detect(id, '/') %>% unlist(),
+      # make an annotation string that is as specific as possible
+      annot = ifelse(
+        '|' %in% unlist(struc),
+        # if there is acyl chain info
+        id %>%
+          str_split(' \\| ') %>%
+          unlist() %>%
+          .[[2]],
+        # if there's no acyl chain info
+        paste(unlist(struc)[[2]], unlist(struc)[[3]], sep=':')
+      )
+    )
+}
 
 ## PLOTTING HELPERS
 

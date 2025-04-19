@@ -6,7 +6,7 @@ source(here("03-scripts", "seelipids_helpers.R"))
 
 # this directory should contain *Lipid Species* datafiles in XLSX format
 dir_data   = here("01-rawdata", "uw_core")
-pat_data   = "xlsx" # filename pattern; UNIX glob
+pat_data   = "csv" # filename pattern; UNIX glob
 files_data = list.files(path = dir_data, pattern = pat_data, full.names = T) %>% 
   # avoid MS autosave files
   .[which(!str_detect(., '~'))]
@@ -22,10 +22,10 @@ file_tidy  = here("02-tidydata", "uw_tidy.tsv")
 # if you have just one file, that's fine, length(files_data) will =1.
 uwdata_long = files_data %>% 
   # file reader helper function melts data to tidy format
-  read_uwx() %>% 
+  read_uw() %>% 
   # now parse and normalize
   # mark non-detection as zero
-  replace_na(list(rab = 0)) %>% 
+  replace_na(list(rab = 0)) %>% .$id %>% unique() separate(id, into=c("class", "chains")) %>% .$class %>% unique()
   # see seelipids_helpers.R to understand/check outputs
   parse_lipidmaps_id() %>% # needs to be sped up
   # normalize by total lipid abundance

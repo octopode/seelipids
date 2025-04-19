@@ -42,6 +42,8 @@ vignettes/*.pdf
 .bak
 stash/*
 *.DS_Store
+*01-rawdata/uw_core/*
+*uw_tidy*
 # large
 #02-tidydata/lipidmaps_wmeta.tsv
 #02-tidydata/lipidmaps_tidy.tsv
